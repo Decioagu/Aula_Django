@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Django 1 - Index</title>
+</head>
+<body>
+    <center>
+    <h1>Index</h1>
+
+    <h2>{{ curso }}</h2> <!-- #07 valor de uma variável "views.py" -->
+
+    <p>{{ outro }}</p> <!-- #07 valor de uma variável "views.py" -->
+
+    <table> <!-- #07 Tabela para exibir os produtos -->
+        <thead> <!-- #07 Cabeçalho da tabela -->
+            <tr> <!-- #07 Linha do cabeçalho -->
+                <th>Produto</th> <!-- #07 Nome do produto -->
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody> <!-- #07 Corpo da tabela -->
+        {% for produto in produtos %} <!-- #07 Loop para exibir cada produto -->
+            <tr>
+                <td><a href="{% url 'produto' produto.id %}">{{ produto.nome }}</a></td> <!-- #07 Link para o produto -->
+                <td>{{ produto.preco }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </center>
+</body>
+</html>

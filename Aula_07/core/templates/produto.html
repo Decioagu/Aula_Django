@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Produto</title>
+</head>
+<body>
+
+    <h1>Produto</h1>
+
+    <table> <!--#07 Tabela para exibir os detalhes do produto -->
+        <thead> <!--#07 Cabeçalho da tabela -->
+            <tr> <!--#07 Linha do cabeçalho -->
+                <th>Produto</th> <!--#07 Nome do produto -->
+                <th>Preço</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+        <tbody> <!--#07 Corpo da tabela -->
+            <tr>
+                <td><a href="{% url 'index' %}">{{ produto.nome }}</a></td> <!--#07 Link para o produto -->
+                 <td>{{ produto.preco }}</td>
+                 <td>{{ produto.estoque }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
