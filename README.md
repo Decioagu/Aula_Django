@@ -207,8 +207,103 @@
 
 **Aula_09**
 
-pip install whitenoise gunicorn
+
 - Projeto_01
+
+- Publicação o servidor (deploy)
+    - Após finalizar o desenvolvimento de um projeto Django localmente, os próximos passos para publicá-lo em um servidor envolvem preparação, configuração e escolha do ambiente de produção.
+
+- 1. Ajustar configurações para produção
+    - No seu arquivo settings.py:
+
+        - DEBUG:
+        - Produção nunca deve ter DEBUG = True.
+            - DEBUG = False
+
+        - ALLOWED_HOSTS:
+        - Inclua o domínio/IP do seu servidor:
+            - ALLOWED_HOSTS = ['MEU_DOMÍNIO.com']
+        
+        - SECRET_KEY:    
+        - Use variáveis de ambiente arquivo .env para esconder sua chave.
+            - pip install python-decouple
+
+            - arquivo: .env
+                - secret_key = SUA_CHAVE
+
+            - arquivo: settings.py
+                - from dotenv import load_dotenv 
+                - import os           
+                - load_dotenv(os.path.join(BASE_DIR, '.env'))
+                - SECRET_KEY = os.getenv('secret_key')
+
+            - Adicione ao seu .gitignore:
+                - .env
+
+- 2. Criar e configurar o banco de dados de produção
+    - Configure no settings.py com variáveis de ambiente:
+        - DATABASES = {
+                        'default': {
+                            'ENGINE': 'django.db.backends.SEU_BANCO_DE_DADOS',
+                            'NAME': os.getenv('DB_NAME'),
+                            ...
+                                    }
+                        }
+
+    - Roteiro para ativação Banco de dados:
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+            - python manage.py makemigrations
+
+        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+            - python manage.py migrate
+
+    - Roteiro para usuário administrador do Banco de dados via Django: 
+        -  Criar um usuário administrador (superusuário) do sistema para acesso a rota Django admin:
+            - python manage.py createsuperuser
+    
+    - Usuário e senha cadastrado:
+        - http://127.0.0.1:8000/admin/
+            - Usuário: MEU_USUARIO
+            - Senha: MINHA_SENHA
+
+
+- 3. Configurar arquivos estáticos e mídias
+    - Publicação de projeto nas redes (deploy)
+        - pip install whitenoise
+
+    - WhiteNoise:
+        - Função: Serve arquivos estáticos (CSS, JS, imagens etc.) diretamente pelo próprio Django, sem depender de um servidor como o Nginx em produção.
+        - Após instalar, você configura no "settings.py" algo como:
+            - MIDDLEWARE = [
+                'django.middleware.security.SecurityMiddleware',
+                'whitenoise.middleware.WhiteNoiseMiddleware',  # logo após SecurityMiddleware
+                ...
+            ]
+
+        - STATIC_URL = 'static/'
+        - STATIC_ROOT = BASE_DIR / 'staticfiles'
+        - MEDIA_ROOT = BASE_DIR / 'media'
+        - MEDIA_URL = '/media/'
+        - STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # gestão dos arquivos estáticos (como CSS, JavaScript e imagens) em produção
+
+    - Roteiro de ativação:
+        - python manage.py collectstatic
+
+    - Será gerado pasta "staticfiles"
+
+ - 4. Configurar o servidor WSGI
+    - Publicação de projeto nas redes (deploy)
+        - pip install gunicorn
+
+    - Gunicorn
+        - Função: É um servidor WSGI de produção para aplicações Python.
+    
+    - Exemplo para rodar localmente (modo produção):
+    - NÃO é obrigatório...
+        - gunicorn projeto.wsgi:application 
+...
+
+
 
 -------------------------------------------------
 Arquivo:
