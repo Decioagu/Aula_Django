@@ -110,7 +110,7 @@
     - __tests.py__: 
         - Testes automatizados (opcional)
     - __views.py__: 
-        - Funções que respondem às requisições
+        - Funções que respondem às requisições (Conexão entre HTML e Banco de Dados)
 - projeto:
     - __asgi.py__:
         - É um ponto de entrada para servidores web compatíveis com ASGI (Asynchronous Server Gateway Interface), como o Uvicorn, Daphne ou Hypercorn. Ele é equivalente ao __wsgi.py__, mas voltado para comunicação assíncrona.
@@ -134,7 +134,7 @@
     - core:
         - __admin.py__: Configuração de registro "Django admin"
         - __models.py__: Modelagem tabela do Banco de Dados
-        - __views.py__: Adição de requisições para templates (paginas HTML)
+        - __views.py__: Conexão entre Pagina HTML e Banco de Dados (__models.py__)
         - migrations:
             - __0001_initial.py__: Modelagem automática após __models.py__
         - templates:
@@ -145,7 +145,7 @@
             - __contato.html__: Pagina HTML
     - projeto:
         - __settings.py__: Adição de diretório ('DIRS': ['templates']) em TEMPLATES
-        - __urls.py__: Adição de rotas de requisições __views.py__
+        - __urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)
 
 - __0001_initial.py__:
     - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
@@ -156,6 +156,9 @@
 
         - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
             - python manage.py migrate
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. Se você não registrar um modelo no admin.py, ele não aparecerá no painel de administração (/admin).
 
     - Roteiro para usuário administrador do Banco de dados via Django: 
         -  Criar um usuário administrador (superusuário) do sistema para acesso a rota Django admin:
@@ -203,14 +206,8 @@
     - OBS: o  comportamento do Django muda de acordo com DEBUG:
         - Com DEBUG = True: Django serve arquivos estáticos automaticamente durante o desenvolvimento.
         - Com DEBUG = False: Django não serve arquivos estáticos sozinho — você precisa usar collectstatic e configurar um servidor web externo (como Nginx ou Apache) para isso.
-...
 
-**Aula_09**
-
-
-- Projeto_01
-
-- Publicação o servidor (deploy)
+- __Publicação no servidor (deploy)__
     - Após finalizar o desenvolvimento de um projeto Django localmente, os próximos passos para publicá-lo em um servidor envolvem preparação, configuração e escolha do ambiente de produção.
 
 - 1. Ajustar configurações para produção
@@ -303,7 +300,146 @@
         - gunicorn projeto.wsgi:application 
 ...
 
+**Aula_09**
 
+- Projeto_02:
+    - Iniciar projeto passo a passo Banco de Dados MySQL:
+
+- pip install django whitenoise gunicorn django-bootstrap4 mysqlclient django-stdimage
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - whitenoise: Middleware para servir arquivos estáticos diretamente no próprio Django (útil em produção).
+
+    - gunicorn: Servidor HTTP WSGI para aplicações Python (como Django).
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+    - mysqlclient: Driver que permite ao Django (e outros apps Python) se conectar a bancos de dados MySQL/MariaDB.
+
+    - django-stdimage : Extensão do campo ImageField do Django com recursos avançados para imagens.
+
+- Roteiro para criação de projeto e aplicação Django:
+    - django-admin startproject projeto_02 .
+    - django-admin startapp core 
+
+- Arquivo:
+    - projeto:
+        - __settings.py__: Variáveis alteradas ALLOWED_HOSTS / INSTALLED_APPS / MIDDLEWARE / TEMPLATES / DATABASES / LANGUAGE_CODE / TIME_ZONE / STATIC_ROOT / STATICFILES_STORAGE
+
+- Criar Banco de Dados em __MySQL__ em "__Mysql Workbench__":
+    - SQL:
+        - CREATE DATABASE projeto_02
+        - DEFAULT CHARACTER SET utf8
+        - DEFAULT COLLATE utf8_general_ci;
+...
+
+**Aula_10**
+
+- Projeto_02:
+    - Configuração de rotas e views para Paginas HTML:
+    - Adição de estilo CSS:
+
+Arquivo:
+    - core:
+        - static:
+            - css:
+                - __styles.css__: Adição de estilo Paginas HTML
+            - images:
+            - js:      
+        - templates:
+            - __index.html__: Pagina HTML (aplicação de estilo __styles.css__ e cotexto __views.py__)
+            - __contato.html__: Pagina HTML (aplicação de contexto __views.py__)
+            - __produto.html__: Pagina HTML (aplicação de contexto __views.py__)
+        - __views.py__: Adição de requisições para templates (Paginas HTML)
+    - projeto:
+        - __urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)
+...
+
+**Aula_11**
+
+- Projeto_02:
+    - Modelagem Banco de Dados __models.py__ e __0001_initial.py__:
+    - Configurar de interface administrativa do Django Admin __admin.py__:
+    - Formulário para Pagina HTML __forms.py__:
+    - Conexões das Pagina HTML na aplicações __views.py__:
+    - Formulação das Paginas HTML:
+
+Arquivo:
+    - core:
+        - migrations:
+            - __0001_initial.py__: Modelagem automática após __models.py__
+        - static:
+            - ...
+        - templates:
+            - __index.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
+            - __contato.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
+            - __produto.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
+        - __admin.py__: Configuração de registro "Django admin" 
+        - __models.py__: Modelagem tabela do Banco de Dados
+        - __forms.py__: Formulário para Pagina HTML de envio automático de e-mail (__models.py__)
+        - __views.py__: Conexão entre Pagina HTML e Banco de Dados (__models.py__)
+
+- OBS: __arquivos estáticos__ (static) são quaisquer elementos CSS, JavaScript e imagens ou documentos.
+
+- __0001_initial.py__:
+    - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
+
+    - Roteiro para ativação Banco de dados:
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+            - python manage.py makemigrations
+
+        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+            - python manage.py migrate
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. Se você não registrar um modelo no admin.py, ele não aparecerá no painel de administração (/admin).
+    
+    - Roteiro para usuário administrador do Banco de dados via Django: 
+        -  Criar um usuário administrador (superusuário) do sistema para acesso a rota Django admin:
+            - python manage.py createsuperuser
+    
+    - Usuário e senha cadastrado:
+        - http://127.0.0.1:8000/admin/login/?next=/admin/
+            - Usuário: decio
+            - Senha: dsa
+...
+
+**Aula_12**
+
+- Projeto_02:
+    - Envio de e-mail automatizado com Django:
+
+Arquivo:
+    - templates:
+        - __forms.py__: Aplicação da biblioteca "EmailMessage" envio de e-mail
+    - projeto:
+        - __settings.py__: Configuração para teste envio de e-mail "EMAIL_BACKEND"
+...
+
+**Aula_13**
+
+- Projeto_03:
+    - Iniciar projeto passo a passo Banco de Dados MySQL:
+
+- pip install django whitenoise gunicorn django-bootstrap4 psycopg2-binary django-stdimage
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - whitenoise: Middleware para servir arquivos estáticos diretamente no próprio Django (útil em produção).
+
+    - gunicorn: Servidor HTTP WSGI para aplicações Python (como Django).
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+    - psycopg2-binary: Driver de instalação do bancos de dados PostgreSQL.
+
+    - django-stdimage : Extensão do campo ImageField do Django com recursos avançados para imagens.
+
+- Roteiro para criação de projeto e aplicação Django:
+    - django-admin startproject projeto_02 .
+    - django-admin startapp core 
+...
 
 -------------------------------------------------
 Arquivo:
