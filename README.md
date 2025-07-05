@@ -326,6 +326,7 @@
 - Arquivo:
     - projeto:
         - __settings.py__: Variáveis alteradas ALLOWED_HOSTS / INSTALLED_APPS / MIDDLEWARE / TEMPLATES / DATABASES / LANGUAGE_CODE / TIME_ZONE / STATIC_ROOT / STATICFILES_STORAGE
+    - __.env__: Variáveis de ambiente (dados sensíveis) 
 
 - Criar Banco de Dados em __MySQL__ em "__Mysql Workbench__":
     - SQL:
@@ -379,6 +380,9 @@ Arquivo:
         - __models.py__: Modelagem tabela do Banco de Dados
         - __forms.py__: Formulário para Pagina HTML de envio automático de e-mail (__models.py__)
         - __views.py__: Conexão entre Pagina HTML e Banco de Dados (__models.py__)
+    - projeto:
+        - __settings.py__: Variáveis criadas MEDIA_URL / MEDIA_ROOT / LOGOUT_REDIRECT_URL
+    
 
 - OBS: __arquivos estáticos__ (static) são quaisquer elementos CSS, JavaScript e imagens ou documentos.
 
@@ -420,29 +424,264 @@ Arquivo:
 **Aula_13**
 
 - Projeto_03:
-    - Iniciar projeto passo a passo Banco de Dados MySQL:
+    - Iniciar projeto passo a passo Banco de Dados PostgreSQL:
 
-- pip install django whitenoise gunicorn django-bootstrap4 psycopg2-binary django-stdimage
+- pip install django gunicorn  psycopg2-binary django-stdimage dj-static
 
     - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
 
-    - whitenoise: Middleware para servir arquivos estáticos diretamente no próprio Django (útil em produção).
-
     - gunicorn: Servidor HTTP WSGI para aplicações Python (como Django).
-
-    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
 
     - psycopg2-binary: Driver de instalação do bancos de dados PostgreSQL.
 
-    - django-stdimage : Extensão do campo ImageField do Django com recursos avançados para imagens.
+    - django-stdimage: Extensão do campo ImageField do Django com recursos avançados para imagens.
+
+    - dj-static:  ajuda a servir arquivos estáticos diretamente dentro da aplicação WSGI, usando a biblioteca static do próprio Python.
 
 - Roteiro para criação de projeto e aplicação Django:
-    - django-admin startproject projeto_02 .
+    - django-admin startproject projeto_03 .
     - django-admin startapp core 
+
+Arquivo:
+    - projeto:
+        - __settings.py__: Variáveis alteradas ALLOWED_HOSTS / INSTALLED_APPS /  TEMPLATES / DATABASES / LANGUAGE_CODE / TIME_ZONE | Variáveis criadas MEDIA_URL  / STATIC_ROOT / MEDIA_ROOT / LOGOUT_REDIRECT_URL
+    - __.env__: Variáveis de ambiente (dados sensíveis) 
 ...
 
--------------------------------------------------
+**Aula_14**
+
+- Projeto_03:
+    - Modelagem Banco de Dados __models.py__ e __0001_initial.py__:
+    - Configurar de interface administrativa do Django Admin __admin.py__:
+    - Conexões das Pagina HTML na aplicações __views.py__ com Class Based Views:
+    - Adição de arquivos e pastas: "static" e "templates" de terceiros 
+
 Arquivo:
+    - core:
+        - static:
+            __Observação__
+        - templates:
+            __Observação__
+        - __models.py__: Modelagem tabela do Banco de Dados
+        - __admin.py__: Configuração de registro "Django admin" 
+        - __views.py__: Adição de requisições para templates (Paginas HTML)
+        - __core_urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)
+
+        
+        
+    - projeto: 
+        - __urls.py__: Gerenciamento de rotas das aplicações
+        
+
+
+- __Observação__: As pastas 'static:' e 'templates:' são extraídas de projetos feitos por terceiros
+
+- __0001_initial.py__:
+    - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
+
+    - Roteiro para ativação Banco de dados:
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+            - python manage.py makemigrations
+
+        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+            - python manage.py migrate
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. Se você não registrar um modelo no admin.py, ele não aparecerá no painel de administração (/admin).
+    
+    - Roteiro para usuário administrador do Banco de dados via Django: 
+        -  Criar um usuário administrador (superusuário) do sistema para acesso a rota Django admin:
+            - python manage.py createsuperuser
+    
+    - Usuário e senha cadastrado:
+        - http://127.0.0.1:8000/admin/login/?next=/admin/
+            - Usuário: decio
+            - Senha: dsa
+...
+
+**Aula_15**
+
+- Projeto_03:
+    - Conexões das Pagina HTML, Banco de Dados e envio de e-mail na aplicações __views.py__:
+    - Envio de e-mail automatizado com formulário em __forms.py__:
+
+- Arquivo:
+    - core:
+        - __forms.py__: Aplicação da biblioteca "EmailMessage" envio de e-mail automático
+        - __views.py__: Conexão entre Pagina HTML, Banco de Dados (__models.py__) e envio de e-mail por formulário (__forms.py__)
+    - projeto:
+        - __settings.py__: Configuração para teste envio de e-mail automatizado (EMAIL_BACKEND)
+...
+
+**Aula_16**
+
+- Projeto_03:
+    - Teste automatizado Django: 
+        
+- python manage.py test
+    - OBS: Realiza teste em arquivo da aplicação __tests.py__
+    - OBS: Teste em Django é somente em ambiente de desenvolvimento: __settings.py__ "DEBUG = True"
+    - OBS: Se o projeto Django a ser testado houver Banco de Dados o banco não será afetado
+
+
+- pip install model_bakery coverage
+
+    - coverage: analisa o código Python durante a execução dos testes e informa quais linhas foram executadas e quais não foram. Ele ajuda a identificar partes do código que ainda não estão cobertas por testes.
+        - coverage run manage.py test
+            - OBS: será criado arquivo binário ".coverage" apos teste como relatório
+            - OBS: caso queira efetuar um conjunto de teste em uma pasta tests, se faz necessario excluir o arquivo teste.py
+
+        - Gerar um relatório no terminal:
+            - coverage report
+
+        - Gerar um relatório HTML (visual):
+            - coverage html
+            - OBS: o uso de "coverage html" gera pasta "htmlcov"
+                - Recomendado adicionar pasta "htmlcov/*" em ".gitignore" para proteção de dados
+
+    - model_bakery: é uma biblioteca focada em testes no Django. Ela serve para gerar objetos de modelos automaticamente, preenchendo os campos com dados fictícios válidos, o que facilita a criação de testes unitários.
+
+          # Biblioteca de preenchimento automático
+        - from model_bakery import baker
+
+          # Cria 5 objeto do modelo User (sem salvar no banco)
+        - user = baker.make('auth.User'_quantity=5)
+
+          # Cria e salva no banco um objeto customizado. Os demais serão preenchidos automaticamente.
+        - post = baker.make('app.Post', title='Exemplo de Título', publicado=True)
+        
+          # Cria também um User automaticamente
+        - post = baker.make('blog.Post')
+
+          # fornecer um autor específico:
+        - autor = baker.make('auth.User', username='admin')
+        - post = baker.make('blog.Post', autor=autor)
+
+          # Inclui campos que não são obrigatórios (opcional):
+        - livro = baker.make('biblioteca.Livro', _fill_optional=True)
+
+          # Cria o objeto, mas não salva no banco
+        - livro = baker.prepare('biblioteca.Livro')
+
+- Arquivo:
+    - core:
+        - tests:
+            - __test_forms.py__: Teste automatizado
+            - __test_models.py__: Teste automatizado
+            - __test_views.py__: Teste automatizado
+...
+
+**Aula_17**
+
+- djangoum2:
+    - Login: User Model Customizado (Django Admin) 
+
+- Arquivo:
+    - core:
+        - __admin.py__: Manipulação de exibição de dados em Django Admin
+        - __models.py__: Personalização de modelo de usuário
+    - djangoum2: 
+        - __urls.py__: Edição de título pagina Admin HTML
+        - __settings.py__: Configurações padrão
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. 
+    
+        - Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: geek
+                - Senha: university
+...
+
+
+**Aula_18**
+
+- djangoum3:
+    - Login: User Model Customizado (Django Admin)
+    - Campo de login por e-mail
+
+- Arquivo:
+    - usuarios:
+        - __admin.py__: Manipulação de exibição de dados em Django Admin
+        - __forms.py__: Formulário de cadastramento de usuário customizado (__models.py__)
+        - __models.py__: Modelagem e gerenciador de usuário customizado
+    - djangoum3: 
+        - __settings.py__: Permisão de customizando de usuário "AUTH_USER_MODEL" (__models.py__)
+
+- Crie seu Super Usuários com:
+
+    - python manage.py createsuperuser
+        - E-mail:
+        - Primeiro nome:
+        - Último nome:
+        - Telefone:
+        - Password:
+        - Password (again):
+...
+
+**Aula_19**
+
+- djangoum3:
+    - Login: User Model Customizado (Django Admin)
+    - Criação de nova paguina de login
+
+- Arquivo:
+    - usuarios:
+    - templates:
+        - registraon:
+            - __login.thml__: Pagina HTML de login
+        - __base.html__: Pagina HTML
+        - __index.html__: Pagina HTML
+    - djangoum3: 
+        - __urls.py__: Nova rota de autenticação
+        - __settings.py__: Variáveis criadas LOGIN_REDIRECT_URL / LOGOUT_REDIRECT_URL
+...
+
+**Aula_20**
+
+- Relacionamento entre modelos (tabelas) de Banco de Dados (__models.py__):
+    - Relacionamento um para um
+    - Relacionamento um para muitos
+    - Relacionamento muitos para muitos
+    
+- Arquivo:
+    - core:
+        - __admin.py__: Manipulação de exibição de dados em Django Admin
+        - __models.py__: Relacionamento de tabelas no Banco de Dados
+    - djangoorm:
+        - __settings.py__: Configuração padrão
+
+- Super Usuários do banco:
+        - Usuário: geek
+        - Senha: university
+...
+
+
+**Aula_21**
+
+- Iniciar projeto comunicação em tempo real (WebSockets) e processos assícrono:
+
+- pip install django django-bootstrap4  django-channels  channels-redis 
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+    - django-channels: expande o Django para trabalhar com ASGI (aplicações assíncronas), Django sozinho só aceita HTTP síncrono (com WSGI), Channels é necessário para trabalhar com tempo real e comunicação persistente.
+
+    - channels-redis: funciona como um intermediário para essa troca de multiplas mensagens, auxiliando a biblioteca "django-channels" para permitir que múltiplos processos no Django.
+
+- Arquivo:
+    - chat:
+        - __admin.py__: Manipulação de exibição de dados em Django Admin
+        - __routing.py__: 
+        - __models.py__: Relacionamento de tabelas no Banco de Dados
+        - __chat_urls.py__: Nova rotas da apalicação
+    - realtime:
+        - __settings.py__: Configuração ASGI (aplicações assíncronas)
+        - __urls.py__: Gerenciador de rotas das aplicações
+-------------------------------------------------
+- Arquivo:
     - core:
         - static:
             - css:

@@ -159,3 +159,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # Teste de envi
 # EMAIL_HOST_USER = '' # seu e-mail
 # EMAIL_HOST_PASSWORD = '' # sua senha de e-mail
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+

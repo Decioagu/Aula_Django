@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Geek University</h1>
+        {% if user.is_anonymous %} <!-- Se usuário não autenticação -->
+           <a class="btn btn-primary" href="{% url 'login' %}">Login</a> <!-- botão link -->
+        {% else %}
+            <div class="alert alert-primary" role="alert">
+                Seja bem-vindo(a) {{ user.get_full_name }}! <!-- Variavel views.py -->
+            </div>
+            <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a> <!-- botão link -->
+        {% endif %}
+    </div>
+{% endblock %}
+
+<!-- botão link -->
