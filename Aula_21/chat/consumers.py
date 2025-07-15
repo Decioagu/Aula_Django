@@ -1,47 +1,49 @@
-from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+from channels.generic.websocket import AsyncWebsocketConsumer
 
-
+#22 Consumer para o Chat (navegador e aplicação)
 class ChatConsumer(AsyncWebsocketConsumer):
 
+    # Entrar na Sala
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['nome_sala']
-        self.room_group_name = f'chat_{self.room_name}'
+        self.room_name = "sala"
+        self.room_group_name = "chat_%s" % self.room_name
 
-        # entrar na sala
+        # aguarda entrar na sala
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
 
-        await self.accept()
+        await self.accept() # aceita a conexão do WebSocket
 
-    async def disconnect(self, code):
-        # sai da sala
+    # Sair da Sala
+    async def disconnect(self, close_code):
+        # aguarda sair da sala
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
 
-    # Recebe mensagem do WebSocket
+    # Enviara mensagem do WebSocket para a sala
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        mensagem = text_data_json['mensagem']
+        message = text_data_json['message']
 
-        # Envia a mensagem para a sala
+        # Enviar mensagem para o grupo
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': mensagem
+                'message': message
             }
         )
 
-    # Recebe a mensagem da sala
+    # Recebe a mensagem do grupo da sala
     async def chat_message(self, event):
-        mensagem = event['message']
+        message = event['message']
 
-        # Envia a mensagem para o WebSocket
+        # Enviar mensagem para WebSocket
         await self.send(text_data=json.dumps({
-            'mensagem': mensagem
+            'message': message
         }))

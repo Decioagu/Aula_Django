@@ -9,7 +9,8 @@
 <body>
  <div clas="container">
      Qual sala de chat você gostaria de entrar?<br/>
-        <input id="nome_sala" name="nome_sala" type="text" size="100" placeholder="Nome da sala..."><br/>
+        <input id="nome_sala" name="nome_sala" type="text" size="100" placeholder="Nome da sala...">
+        <br/>
         {% buttons %}
             <input id="botao" class="btn btn-primary" type="button" value="Entrar" />
         {% endbuttons %}
@@ -19,7 +20,7 @@
      document.querySelector('#nome_sala').onkeyup = function(e){
          if(e.keyCode === 13){
              document.querySelector('#botao').click();
-         }
+        }
      };
 
      document.querySelector('#botao').onclick = function(e){

@@ -656,30 +656,112 @@ Arquivo:
         - Senha: university
 ...
 
-
 **Aula_21**
 
 - Iniciar projeto comunicação em tempo real (WebSockets) e processos assícrono:
 
-- pip install django django-bootstrap4  django-channels  channels-redis 
+- WebSockets:  é uma tecnologia que permite comunicação bidirecional e em tempo real entre o navegador (frontend) e o servidor (backend) através de uma conexão persistente.
+
+📡  - HTTP tradicional:
+        - Cada requisição do cliente abre uma conexão, envia a mensagem, recebe a resposta e fecha a conexão.
+        - Exemplo: o usuário envia um formulário → o servidor responde → conexão encerrada.
+
+    - WebSocket:
+        - O cliente abre uma conexão e mantém ela aberta. Assim, o servidor pode enviar dados para o cliente a qualquer momento, sem precisar esperar por uma requisição.
+        -  É ideal para:
+            - Chats em tempo real 💬
+            - Notificações instantâneas 🔔
+            - Jogos multiplayer 🎮
+            - Atualizações em dashboards 
+
+- pip install django  channels  channels-redis daphne
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - channels: expande o Django para trabalhar com ASGI (aplicações assíncronas), Django sozinho só aceita HTTP síncrono (com WSGI), Channels é necessário para trabalhar com tempo real e comunicação persistente.
+
+    - channels-redis: funciona como um intermediário para essa troca de multiplas mensagens, auxiliando a biblioteca "django-channels" para permitir que múltiplos processos no Django.
+
+    - daphne: é o servidor padrão recomendado para rodar aplicações Django que utilizam Django Channels, que adiciona suporte a WebSockets e outras funcionalidades assíncronas no Django.
+
+- Roteiro:
+    - Criar projeto:
+        - django-admin startproject websocket_project
+    - Criar aplicativo:
+        - python manage.py startapp chat
+    - Aplicar migração de estrutura de banco de dados:
+        - python manage.py migrate
+
+- Para rodar  WebSocket com Channels utilize "Daphne": 
+    - daphne websocket_project.asgi:application
+
+- Arquivo:
+    - chat:
+        - templates:
+            - __chat.html__: Pagina HTML 
+        - __routing.py__: Define as rotas e conexões tratadas por WebSockets (__consumers.py__)
+        - __consumers.py__: Élo de ligação entre WebSockets e a aplicação Django
+        - __views.py__: Adição de requisições para templates (__chat.html__)
+            
+    - websocket_project:
+        - __settings.py__: Configuração ASGI (aplicações assíncronas)
+        - __asgi.py__: Inicia serviços assicrono como Daphne, Uvicorn ou Hypercorn (__routing.py__)
+        - __urls.py__: Rotas da apalicação (__views.py__)
+...
+
+**Aula_22**
+
+- Iniciar projeto comunicação em tempo real (WebSockets) e processos assícrono:
+
+- WebSockets:  é uma tecnologia que permite comunicação bidirecional e em tempo real entre o navegador (frontend) e o servidor (backend) através de uma conexão persistente.
+
+- pip install django django-bootstrap4  channels  channels-redis daphne
 
     - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
 
     - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
 
-    - django-channels: expande o Django para trabalhar com ASGI (aplicações assíncronas), Django sozinho só aceita HTTP síncrono (com WSGI), Channels é necessário para trabalhar com tempo real e comunicação persistente.
+    - channels: expande o Django para trabalhar com ASGI (aplicações assíncronas), Django sozinho só aceita HTTP síncrono (com WSGI), Channels é necessário para trabalhar com tempo real e comunicação persistente.
 
     - channels-redis: funciona como um intermediário para essa troca de multiplas mensagens, auxiliando a biblioteca "django-channels" para permitir que múltiplos processos no Django.
 
+    - daphne: é o servidor padrão recomendado para rodar aplicações Django que utilizam Django Channels, que adiciona suporte a WebSockets e outras funcionalidades assíncronas no Django.
+
+- Roteiro:
+    - Criar projeto:
+        - django-admin startproject websocket_project
+    - Criar aplicativo:
+        - python manage.py startapp chat
+    - Aplicar migração de estrutura de banco de dados:
+        - python manage.py migrate
+
+- Terminal WSL:
+    - Instalação simulação de Banco de Dados em memória temporario: 
+        - sudo apt install redis-server
+    - Iniciar:
+        - redis-server
+        - Teste:
+            - redis-cli ping
+    - OBS: Matenha aberto...
+
+- Para rodar  WebSocket com Channels utilize "Daphne": 
+    - daphne realtime.asgi:application
+
 - Arquivo:
     - chat:
-        - __admin.py__: Manipulação de exibição de dados em Django Admin
-        - __routing.py__: 
-        - __models.py__: Relacionamento de tabelas no Banco de Dados
-        - __chat_urls.py__: Nova rotas da apalicação
+        - templates:
+            - __index.html__: Pagina HTML
+            - __sala.html__: Pagina HTML
+        - __views.py__: Adição de requisições para templates (Paginas HTML)
+        - __consumers.py__: Élo de ligação entre WebSockets e a aplicação Django
+        - __chat_routing.py__: Define as rotas e conexões tratadas por WebSockets (__consumers.py__)
+        - __chat_urls.py__: Nova rotas da apalicação (__views.py__)
     - realtime:
+        - __routing.py__: Gerencia rotas e como as conexões WebSockets (__chat_routing.py__)
         - __settings.py__: Configuração ASGI (aplicações assíncronas)
-        - __urls.py__: Gerenciador de rotas das aplicações
+        - __urls.py__: Gerenciador de rotas das aplicações (__chat_urls.py__)
+...
+
 -------------------------------------------------
 - Arquivo:
     - core:
