@@ -11,7 +11,7 @@ import os
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
 from django.core.asgi import get_asgi_application
-import chat.routing
+from chat import routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'websocket_project.settings')
 
@@ -19,8 +19,13 @@ application = ProtocolTypeRouter({ # Define o tipo de protocolo
     "http": get_asgi_application(), # para requisições HTTP normais
     "websocket": AuthMiddlewareStack( # para conexões WebSocket
         URLRouter(
-            chat.routing.websocket_urlpatterns # Define as rotas WebSocket para o Chat
+            routing.websocket_urlpatterns # Define as rotas WebSocket para o Chat
         )
     ),
 })
 
+'''
+ProtocolTypeRouter: define tipo de protocolo esta chegando (HTTP, WebSocket,  MQTT e  outros).
+AuthMiddlewareStack: para autenticação do usuário no WebSocket.
+URLRouter: para fazer o roteamento interno para os consumers.
+'''

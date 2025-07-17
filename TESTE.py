@@ -1,27 +1,21 @@
-frutas = ["maçã", "banana", "laranja"]
+import geoip2.database
 
+# Caminho para o arquivo GeoLite2-City.mmdb
+db_path = "Aula_23/geoip/GeoLite2-City.mmdb"
 
-frutas.append("pera")
-print(frutas)  # Imprime ["maçã", "banana", "laranja", "pera"]
+# IP que você quer consultar
+ip_address = '0.0.0.0'  # Exemplo: Google DNS
 
-
-frutas.insert(1, "uva")
-print(frutas)  # Imprime ["maçã", "uva", "banana", "laranja", "pera"]
-
-
-frutas.remove("banana")
-print(frutas)  # Imprime ["maçã", "uva", "laranja", "pera"]
-
-
-fruta_removida = frutas.pop(2)
-print(frutas)  # Imprime ["maçã", "uva", "pera"]
-print(fruta_removida)  # Imprime "laranja"
-
-
-frutas.sort() # Ordena a lista em ordem alfabética
-print(frutas)  # Imprime ["maçã", "pera", "uva"]
-
-print(frutas)
-frutas.reverse()    # Inverte a ordem da lista
-print(frutas)  # Imprime ["uva", "pera", "maçã"]
-
+# Abrir o banco de dados GeoLite2
+with geoip2.database.Reader(db_path) as reader:
+    try:
+        response = reader.city(ip_address)
+        
+        print(f"IP: {ip_address}")
+        print(f"Cidade: {response.city.name}")
+        print(f"Região: {response.subdivisions.most_specific.name}")
+        print(f"País: {response.country.name}")
+        print(f"Latitude: {response.location.latitude}")
+        print(f"Longitude: {response.location.longitude}")
+    except geoip2.errors.AddressNotFoundError:
+        print(f"IP {ip_address} não encontrado no banco de dados.")

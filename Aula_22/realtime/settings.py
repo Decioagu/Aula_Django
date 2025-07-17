@@ -25,15 +25,15 @@ SECRET_KEY = '&*iq=4&9+w-tdg&ld^j568^02umzrg(98wt7)j#mq#gjje@6m*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*'] #21 Endereço de acesso ao servidor
+ALLOWED_HOSTS = ['*'] #22 Endereço de acesso ao servidor
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4', #21 Adicionando o Bootstrap 4
-    'channels', #21 Adicionando o Channels para WebSockets
-    'chat', #21 Aplicação de chat
+    'bootstrap4', #22 Adicionando o Bootstrap 4
+    'channels', #22 Adicionando o Channels para WebSockets
+    'chat', #22 Aplicação de chat
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'realtime.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'], #21 Diretório para templates
+        'DIRS': ['templates'], #22 Diretório para templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br' #21 Definindo o idioma para português do Brasil
+LANGUAGE_CODE = 'pt-br' #22 Definindo o idioma para português do Brasil
 
-TIME_ZONE = 'America/Sao_Paulo' #21 Definindo o fuso horário para São Paulo
+TIME_ZONE = 'America/Sao_Paulo' #22 Definindo o fuso horário para São Paulo
 
 USE_I18N = True
 
@@ -121,36 +121,45 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/' #21 URL para arquivos de mídia
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #21 Diretório para arquivos estáticos
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #21 Diretório para arquivos de mídia
+MEDIA_URL = '/media/' #22 URL para arquivos de mídia
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #22 Diretório para arquivos estáticos
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #22 Diretório para arquivos de mídia
 
-#21 Específica do Channels (definindo o ASGI application)
-# ASGI_APPLICATION = 'realtime.routing.application'
-ASGI_APPLICATION = "realtime.asgi.application"
+#22 Substitui o WSGI por ASGI (definindo o ASGI application)
+ASGI_APPLICATION = "realtime.asgi.application" 
+# SGI_APPLICATION = "NOME_DO_PROJETO.ARQUIVO.application"
 
-#21 Configuração do Redis para o Channels (necessário ativação de redis-server)
+#22 Configuração do Redis para o Channels (necessário ativação de redis-server)
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer', #21 Usando o Redis como backend
+        'BACKEND': 'channels_redis.core.RedisChannelLayer', #22 Usando o Redis como backend
         'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)] #21 Configuração porta do Redis
+            'hosts': [('127.0.0.1', 6379)] #22 Configuração porta do Redis
         },
     },
 
 }
 
 '''
-Devido a configuração da porta do Redis ('CONFIG':), se faz necessário 
-ter o Redis instalado e rodando na máquina.
-Para instalar o Redis, você pode usar o comando no terminal WSL do Windows:
-    sudo apt-get install redis-server
-Iniciar:
-    redis-server
-Teste:
-    redis-cli ping
-    O comando acima deve retornar "PONG" se o Redis estiver funcionando corretamente.
+Devido a configuração da porta do Redis ('CONFIG':{...}), se faz necessário ter 
+o Redis instalado e rodando no terminal WSL no Windows ou Terminal Ubuntu Linux.
 
-OBS: Mantenha o terminal aberto para que o Redis continue rodando enquanto você desenvolve.  
-Redis é um banco de dados em memória super rápido, usado como cache, fila de mensagens ou broker.
+Para instalar o Redis, você pode usar o comando no terminal WSL do Windows:
+    # Atualiza a lista de pacotes
+        - sudo apt update
+    # Instala as versões mais recentes
+        - sudo apt-get install redis-server 
+Iniciar Redis:
+    - redis-server
+Teste Redis:
+    - redis-cli ping
+    OBS: O comando acima deve retornar "PONG" se o Redis estiver funcionando corretamente.
+
+OBS: Mantenha o terminal Linux aberto para que o Redis continue rodando enquanto você desenvolve.
+
+    redis-server: é um banco de dados em memória super rápido e temporário, usado como cache, 
+    fila de mensagens ou broker. No contexto do Django Channels, o Redis é usado como um “broker” 
+    (intermediário) para permitir que o servidor HTTP (Django) e o servidor WebSocket consigam 
+    trocar informações entre si de maneira assíncrona, em resumo Redis gerenciar as conexões 
+    simultâneas de Django Channels.
 '''

@@ -168,6 +168,9 @@
         - http://127.0.0.1:8000/admin/login/?next=/admin/
             - Usuário: decio
             - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_08**
@@ -297,7 +300,10 @@
     
     - Exemplo para rodar localmente (modo produção):
     - NÃO é obrigatório...
-        - gunicorn projeto.wsgi:application 
+        - gunicorn projeto.wsgi:application
+
+- 5. Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_09**
@@ -333,6 +339,9 @@
         - CREATE DATABASE projeto_02
         - DEFAULT CHARACTER SET utf8
         - DEFAULT COLLATE utf8_general_ci;
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_10**
@@ -355,6 +364,9 @@ Arquivo:
         - __views.py__: Adição de requisições para templates (Paginas HTML)
     - projeto:
         - __urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_11**
@@ -407,6 +419,9 @@ Arquivo:
         - http://127.0.0.1:8000/admin/login/?next=/admin/
             - Usuário: decio
             - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_12**
@@ -419,6 +434,9 @@ Arquivo:
         - __forms.py__: Aplicação da biblioteca "EmailMessage" envio de e-mail
     - projeto:
         - __settings.py__: Configuração para teste envio de e-mail "EMAIL_BACKEND"
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_13**
@@ -445,7 +463,10 @@ Arquivo:
 Arquivo:
     - projeto:
         - __settings.py__: Variáveis alteradas ALLOWED_HOSTS / INSTALLED_APPS /  TEMPLATES / DATABASES / LANGUAGE_CODE / TIME_ZONE | Variáveis criadas MEDIA_URL  / STATIC_ROOT / MEDIA_ROOT / LOGOUT_REDIRECT_URL
-    - __.env__: Variáveis de ambiente (dados sensíveis) 
+    - __.env__: Variáveis de ambiente (dados sensíveis)
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver 
 ...
 
 **Aula_14**
@@ -465,15 +486,10 @@ Arquivo:
         - __models.py__: Modelagem tabela do Banco de Dados
         - __admin.py__: Configuração de registro "Django admin" 
         - __views.py__: Adição de requisições para templates (Paginas HTML)
-        - __core_urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)
-
-        
-        
+        - __core_urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)     
     - projeto: 
         - __urls.py__: Gerenciamento de rotas das aplicações
         
-
-
 - __Observação__: As pastas 'static:' e 'templates:' são extraídas de projetos feitos por terceiros
 
 - __0001_initial.py__:
@@ -497,6 +513,9 @@ Arquivo:
         - http://127.0.0.1:8000/admin/login/?next=/admin/
             - Usuário: decio
             - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_15**
@@ -511,6 +530,9 @@ Arquivo:
         - __views.py__: Conexão entre Pagina HTML, Banco de Dados (__models.py__) e envio de e-mail por formulário (__forms.py__)
     - projeto:
         - __settings.py__: Configuração para teste envio de e-mail automatizado (EMAIL_BACKEND)
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_16**
@@ -591,6 +613,9 @@ Arquivo:
             - python manage.py createsuperuser
                 - Usuário: geek
                 - Senha: university
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 
@@ -617,6 +642,9 @@ Arquivo:
         - Telefone:
         - Password:
         - Password (again):
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_19**
@@ -635,6 +663,9 @@ Arquivo:
     - djangoum3: 
         - __urls.py__: Nova rota de autenticação
         - __settings.py__: Variáveis criadas LOGIN_REDIRECT_URL / LOGOUT_REDIRECT_URL
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_20**
@@ -654,11 +685,14 @@ Arquivo:
 - Super Usuários do banco:
         - Usuário: geek
         - Senha: university
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 ...
 
 **Aula_21**
 
-- Iniciar projeto comunicação em tempo real (WebSockets) e processos assícrono:
+- Iniciar projeto de comunicação em tempo real (WebSockets) e processos assícrono:
 
 - WebSockets:  é uma tecnologia que permite comunicação bidirecional e em tempo real entre o navegador (frontend) e o servidor (backend) através de uma conexão persistente.
 
@@ -686,13 +720,16 @@ Arquivo:
 
 - Roteiro:
     - Criar projeto:
+        - django-admin startproject NOME_DO_PROJETO
         - django-admin startproject websocket_project
     - Criar aplicativo:
+        - python manage.py startapp NOME_DA_APLICAÇÃO
         - python manage.py startapp chat
     - Aplicar migração de estrutura de banco de dados:
         - python manage.py migrate
 
 - Para rodar  WebSocket com Channels utilize "Daphne": 
+    - daphne NOME_DO_PROJETO.asgi:application
     - daphne websocket_project.asgi:application
 
 - Arquivo:
@@ -704,14 +741,14 @@ Arquivo:
         - __views.py__: Adição de requisições para templates (__chat.html__)
             
     - websocket_project:
+        - __asgi.py__: Gerencia rotas e serviços assicrono como Daphne ou Uvicorn (__routing.py__)
         - __settings.py__: Configuração ASGI (aplicações assíncronas)
-        - __asgi.py__: Inicia serviços assicrono como Daphne, Uvicorn ou Hypercorn (__routing.py__)
         - __urls.py__: Rotas da apalicação (__views.py__)
 ...
 
 **Aula_22**
 
-- Iniciar projeto comunicação em tempo real (WebSockets) e processos assícrono:
+- Projeto de comunicação em tempo real (WebSockets) e processos assícrono:
 
 - WebSockets:  é uma tecnologia que permite comunicação bidirecional e em tempo real entre o navegador (frontend) e o servidor (backend) através de uma conexão persistente.
 
@@ -736,15 +773,18 @@ Arquivo:
         - python manage.py migrate
 
 - Terminal WSL:
-    - Instalação simulação de Banco de Dados em memória temporario: 
+    - Atualiza a lista de pacotes:
+        - sudo apt update 
+    - Instalação simulação de Banco de Dados em memória temporario Redis: 
         - sudo apt install redis-server
-    - Iniciar:
+    - Iniciar Redis:
         - redis-server
-        - Teste:
+        - Teste Redis:
             - redis-cli ping
-    - OBS: Matenha aberto...
+                - Resposta "PONG"
+        - OBS: Matenha o terminal Linux aberto ao rodar a aplicação.
 
-- Para rodar  WebSocket com Channels utilize "Daphne": 
+- Para rodar  WebSocket com Channels utilize "Daphne":
     - daphne realtime.asgi:application
 
 - Arquivo:
@@ -753,14 +793,62 @@ Arquivo:
             - __index.html__: Pagina HTML
             - __sala.html__: Pagina HTML
         - __views.py__: Adição de requisições para templates (Paginas HTML)
+        - __routing.py__: Rotas e conexões tratadas por WebSockets (__consumers.py__)
         - __consumers.py__: Élo de ligação entre WebSockets e a aplicação Django
-        - __chat_routing.py__: Define as rotas e conexões tratadas por WebSockets (__consumers.py__)
-        - __chat_urls.py__: Nova rotas da apalicação (__views.py__)
+        - __chat_urls.py__: Rotas da apalicação (__views.py__)
     - realtime:
-        - __routing.py__: Gerencia rotas e como as conexões WebSockets (__chat_routing.py__)
-        - __settings.py__: Configuração ASGI (aplicações assíncronas)
+        - __asgi.py__: Gerencia rotas e serviços assicrono como Daphne ou Uvicorn (__routing.py__)
         - __urls.py__: Gerenciador de rotas das aplicações (__chat_urls.py__)
+        - __settings.py__: Configuração ASGI (aplicações assíncronas)   
 ...
+
+**Aula_23**
+
+- Geolocalização com Django (Mapas):
+
+- pip install django geoip2 requests
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - geoip2: Permite obter a localização geográfica de um endereço IP (cidade, país, latitude/longitude).
+
+    - requests: Fazer requisições HTTP (GET, POST, PUT, DELETE) em formato JSON.
+
+- Baixar GeoLite2.mmdb:
+    - Pagina:
+        - https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/
+    - Atanho para arquivos downloads:
+        - https://github.com/P3TERX/GeoLite.mmdb
+
+    - Arquivos GeoLite2.mmdb: É um banco de dados binário criado pela MaxMind com dados de geolocalização de endereços IP, ele contém informações como:
+    🌐 - País (Brasil, EUA, etc.)
+    🏙️ - Cidade (São Paulo, Nova York…)
+    📍 - Latitude e longitude
+    🕐 - Fuso horário
+    📡 - ASN (organização dona do IP, tipo uma operadora)
+
+- Pagina Yelp é uma plataforma online onde pessoas podem pesquisar restaurantes, bares, lojas, serviços e atrações em uma cidade, neste caso é utilizado para alimentar a API Django:
+    - https://www.yelp.com.br/rio-de-janeiro
+    - Crie um novo App (Create New App)
+
+- Arquivo:
+    - core:
+        - templates:
+            - __base.html__:
+            - __index.html__:
+            - __maps.html__:
+        - __utils.py__: Uso de geolocalização pela API (__GeoLite2-City.mmdb__ e __GeoLite2-City.mmdb__)
+        - __views.py__: Requisições para templates (Paginas HTML) e geolocalização (__utils.py__)
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - geo:
+        - __settings.py__: Configuração de Geolocalização
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+    - geoip:
+        - __GeoLite2-City.mmdb__: Arquivo binario de geolozalização
+        - __GeoLite2-City.mmdb__: Arquivo binario de geolozalização
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 
 -------------------------------------------------
 - Arquivo:

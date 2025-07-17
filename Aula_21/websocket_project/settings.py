@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d!x*jv=9(e3ne7g0lq64peheq&9lljc1=@q0ag&^h&7tc^isi%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #21 Endereço de acesso ao servidor
 
 
 # Application definition
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat',              # nossa app
-    'channels',          # adicione channels
+    'chat',              #21 nossa app
+    'channels',          #21 adicione channels
 ]
 
 MIDDLEWARE = [
@@ -104,9 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br' #21 Definindo o idioma para português do Brasil
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo' #21 Definindo o fuso horário para São Paulo
 
 USE_I18N = True
 
@@ -123,10 +123,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Substitui o WSGI por ASGI
+#21 Substitui o WSGI por ASGI (definindo o ASGI application)
 ASGI_APPLICATION = 'websocket_project.asgi.application'
+# ASGI_APPLICATION = "NOME_DO_PROJETO.ARQUIVO.application"
 
-# Configuração de backend de Channels (usando memória para testes)
+
+#21 Configuração de backend de Channels (usando memória para testes)
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer'
