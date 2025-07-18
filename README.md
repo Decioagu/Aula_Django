@@ -829,15 +829,17 @@ Arquivo:
 
 - Pagina Yelp é uma plataforma online onde pessoas podem pesquisar restaurantes, bares, lojas, serviços e atrações em uma cidade, neste caso é utilizado para alimentar a API Django:
     - https://www.yelp.com.br/rio-de-janeiro
-    - Crie um novo App (Create New App)
+
+    - Crie um novo App (Create New App):
+        - https://www.yelp.com/developers/v3/manage_app
 
 - Arquivo:
     - core:
         - templates:
-            - __base.html__:
-            - __index.html__:
-            - __maps.html__:
-        - __utils.py__: Uso de geolocalização pela API (__GeoLite2-City.mmdb__ e __GeoLite2-City.mmdb__)
+            - __base.html__: Pagina HTML
+            - __index.html__: Pagina HTML
+            - __maps.html__: Pagina HTML
+        - __utils.py__: Uso de geolocalização (__GeoLite2-City.mmdb__ e __GeoLite2-City.mmdb__) e YELP_API_KEY
         - __views.py__: Requisições para templates (Paginas HTML) e geolocalização (__utils.py__)
         - __core_urls.py__: Rotas da apalicação (__views.py__)
     - geo:
@@ -849,6 +851,8 @@ Arquivo:
 
 - Iniciar execução do Django dentro da pasta do projeto:
     - python manage.py runserver
+...
+
 
 -------------------------------------------------
 - Arquivo:

@@ -6,16 +6,16 @@
             <form autocomplete="off" action="{% url 'index' %}">
                 {% csrf_token %}
                 <div class="form-group">
-                    <h1><a href="{% url 'index' %}">Buscador Geek</a></h1>
-                    <h4>[{{ city }} {% if country %} - {{ country }} {% endif %}]</h4>
+                    <h1><a href="{% url 'index' %}">Meu Buscador</a></h1>
+                    <h4>Cidade atual de pesquisa: [{{ city }} {% if country %} - {{ country }} {% endif %}]</h4>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="key" placeholder="Digite um termo para busca (obrigatório)" required/>
-                    <small id="keyHelp" class="form-text text-muted">Exemplo: Mexican Food, Brazilian Food, Asian Food</small>
+                    <small id="keyHelp" class="form-text text-muted">Exemplo: Pizza</small>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="loc" placeholder="Digite uma cidade para efetuar a busca"/>
-                    <small id="keyLoc" class="form-text text-muted">Exemplo: Vancouver, Madrid, Mexico City</small>
+                    <small id="keyLoc" class="form-text text-muted">Exemplo: Rio de janeiro</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
