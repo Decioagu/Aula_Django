@@ -25,3 +25,16 @@ with geoip2.database.Reader(db_path) as reader:
         print(f"Longitude: {response.location.longitude}")
     except geoip2.errors.AddressNotFoundError:
         print(f"IP {ip_address} não encontrado no banco de dados.")
+
+'''
+O que é geoip2.database?
+O módulo geoip2.database fornece a classe Reader, que permite abrir e 
+consultar arquivos de banco de dados GeoIP (no formato .mmdb).
+
+Esses arquivos contêm informações de geolocalização associadas a endereços IP. 
+A biblioteca lê o arquivo e retorna dados como:
+    - país 🌎
+    - cidade 🏙️
+    - latitude/longitude 📍
+    - provedor de internet (ISP) 
+'''

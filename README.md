@@ -853,6 +853,57 @@ Arquivo:
     - python manage.py runserver
 ...
 
+**Aula_24**
+
+- Gerar gráficos com Django:
+
+- pip install django django-chartjs django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-chartjs: é um app Django que facilita a inclusão de gráficos interativos no seu projeto usando o Chart.js.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Arquivo:
+    - core:
+        - templates:
+            - __index.html__: Pagina HTML
+        - __views.py__: Requisições para templates (Paginas HTML) e gereção de gráficos
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - charts:
+        - __settings.py__: Configuração de Geolocalização
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+    
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+...
+
+**Aula_25**
+
+- Gerar PDF com Django:
+
+- pip install django  reportlab weasyprint
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - reportLab: é uma biblioteca Python usada principalmente para gerar arquivos PDF de maneira dinamicamente (não precisa de um modelo pronto).
+
+    - weasyPrint: é usada para gerar PDFs a partir de páginas HTML, diferente do ReportLab que cria tudo do zero.
+
+- Arquivo:
+    - core:
+        - templates:
+            - __index.html__: Pagina HTML
+        - __views.py__: Requisições para templates (Paginas HTML) e criar PDF
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - relatorio:
+        - __settings.py__: Configuração de Geolocalização
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
 
 -------------------------------------------------
 - Arquivo:

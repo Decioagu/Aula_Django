@@ -35,3 +35,18 @@ if __name__ == "__main__":
     if resultado:
         for negocio in resultado.get("businesses", []):
             print(f"- {negocio['name']} ({negocio['location']['address1']})")
+
+'''
+O que é o Yelp?
+    - https://www.yelp.com.br/rio-de-janeiro
+    
+O Yelp é uma plataforma online (site e aplicativo) onde pessoas podem:
+✅ - Procurar empresas locais (restaurantes, bares, academias, lojas, etc.)
+✅ - Verificar avaliações e notas deixadas por outros usuários
+✅ - Consultar informações como telefone, endereço, fotos, horário de funcionamento e até fazer reservas.
+
+O Yelp tem uma API chamada Yelp Fusion API, que oferece vários endpoints para diferentes funcionalidades, por exemplo:
+URL da API do Yelp para buscar empresas por palavra-chave (term) e localização (location).
+
+https://www.yelp.com/developers/v3/manage_app
+'''
