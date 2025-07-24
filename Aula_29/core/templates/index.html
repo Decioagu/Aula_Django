@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+    <div class="row">
+        <h1>Produtos</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+            <tbody> <!-- #28 Corpo da tabela -->
+                {% for produto in produtos %} <!-- #28 Itera sobre os produtos -->
+                    <tr> <!-- #28 Linha do produto -->
+                        <td>{{ produto.id }}</td>
+                        <td>{{ produto.nome }}</td>
+                        <td>R$ {{ produto.preco|intcomma }}</td>
+                        <td>
+                            <!-- produto.pk -> Chave primária do produto | ver core_urls.py -->
+                            <a class="btn btn-warning" href="{% url 'editar_produto' produto.pk %}">Editar</a> <!-- #28 Link para editar o produto -->
+                            <a class="btn btn-danger" href="{% url 'deletar_produto' produto.pk %}">Deletar</a> <!-- #28 Link para deletar o produto -->
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

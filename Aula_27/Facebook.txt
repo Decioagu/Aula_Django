@@ -1,0 +1,33 @@
+Essa tela é o início da criação do App
+
+DETALHES DO APP:
+	-Escolheu o Nome do app (ex.: DecioSan).
+	-Preencheu o E-mail de contato do app.
+
+Agora clique no botão "Avançar".
+
+CASOS DE USO:
+O Facebook vai te perguntar "Para qual finalidade você está criando esse app?".
+
+	-Escolha:
+	-"Controle de acesso" ou "Consumer" (Consumidor)
+Isso é o ideal para login com Facebook.
+
+Clique em "Avançar".
+
+EMPRESA:
+Se o Facebook pedir Vincular a uma conta de empresa, você pode:
+
+	- Escolher "Nenhuma conta de empresa" (caso esteja criando para testes ou uso pessoal).
+
+Ou vincular a uma empresa se já tiver.
+
+Clique em "Avançar".
+
+REQUISITOS:
+O Facebook vai listar alguns requisitos (políticas de uso).
+
+Leia e clique em "Avançar".
+
+VISÃO GERAL:
+Clique em "Criar app".

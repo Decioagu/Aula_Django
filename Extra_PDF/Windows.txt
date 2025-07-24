@@ -1,0 +1,2 @@
+WeasyPrint: depende de bibliotecas externas do sistema (como o GTK/Pango/Cairo) 
+que não vêm instaladas por padrão no Windows. 

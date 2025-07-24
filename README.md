@@ -114,7 +114,7 @@
 - projeto:
     - __asgi.py__:
         - É um ponto de entrada para servidores web compatíveis com ASGI (Asynchronous Server Gateway Interface), como o Uvicorn, Daphne ou Hypercorn. Ele é equivalente ao __wsgi.py__, mas voltado para comunicação assíncrona.
-    - __settings.py__:
+    - __settings.py__:F
         - Arquivo responsável pela configuração de banco de dados, segurança, diretórios, apps instalados, idiomas, entre muitos outros ajustes.
     - __urls.py__:
         - Arquivo responsável por definir as rotas do seu site (url).
@@ -131,8 +131,8 @@
 - Projeto_01
 
 -  Arquivo:
-    - core:
-        - __admin.py__: Configuração de registro "Django admin"
+    - core: 
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
         - __models.py__: Modelagem tabela do Banco de Dados
         - __views.py__: Conexão entre Pagina HTML e Banco de Dados (__models.py__)
         - migrations:
@@ -388,7 +388,7 @@ Arquivo:
             - __index.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
             - __contato.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
             - __produto.html__: Pagina HTML (conexão __arquivos estáticos__ e __views.py__)
-        - __admin.py__: Configuração de registro "Django admin" 
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
         - __models.py__: Modelagem tabela do Banco de Dados
         - __forms.py__: Formulário para Pagina HTML de envio automático de e-mail (__models.py__)
         - __views.py__: Conexão entre Pagina HTML e Banco de Dados (__models.py__)
@@ -484,7 +484,7 @@ Arquivo:
         - templates:
             __Observação__
         - __models.py__: Modelagem tabela do Banco de Dados
-        - __admin.py__: Configuração de registro "Django admin" 
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
         - __views.py__: Adição de requisições para templates (Paginas HTML)
         - __core_urls.py__: Adição de rotas requisições __views.py__ para templates (Paginas HTML)     
     - projeto: 
@@ -904,7 +904,213 @@ Arquivo:
 
 - Iniciar execução do Django dentro da pasta do projeto:
     - python manage.py runserver
+---
 
+**Aula_26**
+
+- Aumento de seguraça na aplicação Django:
+
+- Arquivo:
+    - seguranca:
+        - __settings.py__: Configurações adicionais de segurança
+
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
+
+**Aula_27**
+
+- Login com Facebook aplicação Django:
+
+- pip install django social-auth-app-django django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - social-auth-app-django: é uma biblioteca para integração de autenticação social no Django. Ela permite que os usuários façam login usando contas de serviços como Google, Facebook, GitHub, Twitter, etc. 
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Facebook:
+    - Necessario ter uma conta:
+    - Área de desenvolvedor:
+        - https://developers.facebook.com/apps
+            - ![Facebook_01](Aula_27/Facebook.png)
+            - [Facebook_02](Aula_27/Facebook.txt)
+            - [Facebook_03](Aula_27/Facebook.pdf)
+
+    - OBS: Essa aplicação exige uso de protocolo HTTPS, uma aplicação localhost só executa protocolo HTTP, ou seja, se faz necessário DEPLOY da aplicação em um SERVIDOR para o uso de protocolo HTTPS.
+        - HTTP = HyperText Transfer Protocol (Protocolo de Transferência de Hipertexto)
+        - HTTPS = HyperText Transfer Protocol Secure (Protocolo de Transferência de Hipertexto Seguro)
+
+
+- Arquivo:
+ - core:
+        - static:
+            - css:
+                - __style.css__: Estilo 
+        - templates:
+            - __base.html__: Pagina HTML (__style.css__)
+            - __index.html__: Pagina HTML
+            - __maps.html__: Pagina HTML
+        - __views.py__: Requisições para templates (Paginas HTML) 
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - dsocial:
+        - __settings.py__: Configuração midia social
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
+
+
+**Aula_28**
+ 
+- CRUD como Function-Based Viewsem Django:
+
+- pip install django django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Arquivo:
+ - core:
+        - templates:
+            - __base.html__: Pagina HTML 
+            - __index.html__: Pagina HTML (lista produtos)
+            - __produto_form.html__: Pagina HTML (criar e editar produtos)
+            - __produto_del.html__: Pagina HTML (deletar produtos)
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
+        - __models.py__: Modelagem do Banco de Dados
+        - __forms.py__: Formulário de cadastramento (__models.py__)
+        - __views.py__: Requisições para templates CRUD (Paginas HTML), uso de (__models.py__)
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - crudcbv:
+        - __settings.py__: Configuração aplicação Django
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+- OBS: Em Function-Based Viewsem é necessario o uso de formulario "forms.py" para criar e processar as "viwes.py"
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. 
+    
+        - Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: decio
+                - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
+
+**Aula_29**
+
+- CRUD como Class Based Views em Django:
+
+- pip install django django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Arquivo:
+ - core:
+        - templates:
+            - __base.html__: Pagina HTML 
+            - __index.html__: Pagina HTML (lista produtos)
+            - __produto_form.html__: Pagina HTML (criar e editar produtos)
+            - __produto_del.html__: Pagina HTML (deletar produtos)
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
+        - __models.py__: Modelagem do Banco de Dados
+        - __views.py__: Requisições para templates CRUD (Paginas HTML) 
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - crudcbv:
+        - __settings.py__: Configuração aplicação Django
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. 
+    
+        - Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: decio
+                - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
+
+**Aula_30**
+
+- Paginação de lista de produtos com Function-Based Viewsem em Django:
+
+- pip install django django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Arquivo:
+ - core:
+        - templates:
+            - __index.html__: Pagina HTML 
+            - __paginacao.html__: Pagina HTML
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
+        - __models.py__: Modelagem do Banco de Dados
+        - __forms.py__: Formulário de cadastramento (__models.py__)
+        - __views.py__: Requisições para templates (Paginas HTML) 
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - dpag:
+        - __settings.py__: Configuração aplicação Django
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. 
+    
+        - Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: decio
+                - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
+
+**Aula_31**
+
+- Paginação de lista de produtos com Class Based Views em Django:
+
+- pip install django django-bootstrap4
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - django-bootstrap4: Biblioteca que facilita a integração do framework Bootstrap 4 com templates do Django.
+
+- Arquivo:
+ - core:
+        - templates:
+            - __index.html__: Pagina HTML 
+            - __paginacao.html__: Pagina HTML
+        - __admin.py__: Manipulação de registros no Banco de Dados "Django admin"
+        - __models.py__: Modelagem do Banco de Dados
+        - __views.py__: Requisições para templates (Paginas HTML) 
+        - __core_urls.py__: Rotas da apalicação (__views.py__)
+    - dpag:
+        - __settings.py__: Configuração aplicação Django
+        - __urls.py__: Gerenciador de rotas das aplicações (__core_urls.py__)
+
+- __admin.py__:
+    - Configurar a interface administrativa do Django Admin para manipulação de registros no Banco de Dados. 
+    
+        - Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: decio
+                - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
 -------------------------------------------------
 - Arquivo:
     - core:
