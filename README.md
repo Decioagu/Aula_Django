@@ -151,10 +151,10 @@
     - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
 
     - Roteiro para ativação Banco de dados:
-        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para verificar erro: 
             - python manage.py makemigrations
 
-        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+        - Criar a migração, aplica as mudanças no Banco de Dados com:
             - python manage.py migrate
 
 - __admin.py__:
@@ -251,10 +251,10 @@
                         }
 
     - Roteiro para ativação Banco de dados:
-        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para verificar erro: 
             - python manage.py makemigrations
 
-        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+        - Criar a migração, aplica as mudanças no Banco de Dados com:
             - python manage.py migrate
 
     - Roteiro para usuário administrador do Banco de dados via Django: 
@@ -402,10 +402,10 @@ Arquivo:
     - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
 
     - Roteiro para ativação Banco de dados:
-        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para verificar erro: 
             - python manage.py makemigrations
 
-        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+        - Criar a migração, aplica as mudanças no Banco de Dados com:
             - python manage.py migrate
 
 - __admin.py__:
@@ -496,10 +496,10 @@ Arquivo:
     - Quando você cria ou altera um modelo (por exemplo, adiciona um novo campo em uma tabela) em __models.py__, o Django não aplica essas mudanças diretamente no banco de dados. Em vez disso, ele precisa de um "roteiro" (chamado de migração) que diga exatamente o que deve ser feito.
 
     - Roteiro para ativação Banco de dados:
-        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para modelagem automática: 
+        - Após modelagem do Banco de Dados em "__models.py__" aplicar comando para verificar erro:  
             - python manage.py makemigrations
 
-        - Depois de criar a migração, você aplica as mudanças no Banco de Dados com:
+        - Criar a migração, aplica as mudanças no Banco de Dados com:
             - python manage.py migrate
 
 - __admin.py__:
@@ -1111,37 +1111,60 @@ Arquivo:
 - Iniciar execução do Django dentro da pasta do projeto:
     - python manage.py runserver
 ---
--------------------------------------------------
+
+**Aula_32**
+
+- Customizar django/admin:
+
 - Arquivo:
-    - core:
-        - static:
-            - css:
-                - __estilos.css__: 
-            - images:
-                - __django.png__: 
-            - js:
-                - __script.js__: 
-        - migrations:
-            - __0001_initial.py__: 
-        - templates:
-            - __500.html__: 
-            - __400.html__: 
-            - __index.html__: 
-            - __contato.html__: 
-            - __produto.html__: 
-        - __init__.py: 
-        - __admin.py__: 
-        - __apps.py__: 
-        - __models.py__: 
-        - __tests.py__: 
-        - __views.py__: 
-    - projeto:
-        - __asgi.py__:
-        - __settings.py__: 
-        - __urls.py__:
-    - staticfiles:
-        - __*arquivos static__: gerados por "python manage.py collectstatic"
-    - __db.sqlite3__:
-    - __manage.py__:
+    - dpag:
+        - __settings.py__: customizar django/admin
+        - __urls.py__: customizar django/admin
 
+- Super Usuários do banco:
+            - python manage.py createsuperuser
+                - Usuário: decio
+                - Senha: dsa
+---
 
+**Aula_33 e Aula_34**
+- Acesso de banco de dados já existente em MySQL:
+
+- pip install django mysqlclient
+
+    - django: Framework web de alto nível para desenvolvimento rápido de aplicações web seguras e escaláveis.
+
+    - mysqlclient: Driver que permite ao Django (e outros apps Python) se conectar a bancos de dados MySQL/MariaDB.
+
+- OBS para linux:
+    - sudo apt-get install python3-dev defult-libmysqlclient-dev -y
+
+- Configure o __settings.py__ conforme o banco de dados desejado.
+
+- Gerar automaticamente modelos (models.py):
+    - python manage.py inspectdb
+        - Cole os dados em __models.py__ para ativação Banco de dados:
+    **OU**
+    - python manage.py inspectdb > PASTA/models.py
+        - modelagem é escrita ditera para o arquivo.
+
+- Após modelagem do Banco de Dados em "__models.py__" aplicar comando paraverificar erro: 
+    - python manage.py makemigrations
+
+- Criar a migração, aplica as mudanças no Banco de Dados com:
+    - python manage.py migrate
+
+- Configure o __admin.py__ para manipulação dos dados existente no Banco de Daos em Django Admin.
+
+- Roteiro para usuário administrador do Banco de dados via Django: 
+        -  Criar um usuário administrador (superusuário) do sistema para acesso a rota Django admin:
+            - python manage.py createsuperuser
+    
+    - Usuário e senha cadastrado:
+        - http://127.0.0.1:8000/admin/login/?next=/admin/
+            - Usuário: decio
+            - Senha: dsa
+
+- Iniciar execução do Django dentro da pasta do projeto:
+    - python manage.py runserver
+---
