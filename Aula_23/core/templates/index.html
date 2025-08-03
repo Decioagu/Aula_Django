@@ -7,7 +7,6 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <h1><a href="{% url 'index' %}">Meu Buscador</a></h1>
-                    <h4>Cidade atual de pesquisa: [{{ city }} {% if country %} - {{ country }} {% endif %}]</h4>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="key" placeholder="Digite um termo para busca (obrigatório)" required/>
@@ -25,12 +24,17 @@
                 <h1>Nada encontrado sobre o termo buscado</h1>
             {% elif city and items %}
                 <h1>Resultado da Busca</h1>
+                <h4>Cidade atual do usuário: [{{ city }} {% if country %} - {{ country }} {% endif %}]</h4>
                 {% for biz in items.businesses %}
-                    <span class="text-info">{{ biz.name }}, {{ city }}</span><br/>
+                    <span class="text-info">{{ biz.name }}: {{ biz.location.display_address }}</span><br/>
                 {% endfor %}
             {% endif %}
         </div>
+        <br>
+        <br>
         {% if city and items|length > 1 %}
             {% include 'maps.html' %}
         {% endif %}
+        <br>
+        <br>
 {% endblock %}

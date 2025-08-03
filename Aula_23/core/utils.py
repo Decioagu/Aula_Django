@@ -7,14 +7,20 @@ from django.contrib.gis.geoip2 import GeoIP2
 YELP_SEARCH_ENDPOINT = 'https://api.yelp.com/v3/businesses/search' 
 
 #23 Busca no "Yelp" por palavra chave e localização
-def yelp_search(keyword=None, location=None): 
+def yelp_search(keyword=None, location=None, limit=15, offset=0): 
     #23 Definindo a chave da API
-    headers = {"Authorization": "Bearer " + settings.YELP_API_KEY} 
+    headers = {"Authorization": "Bearer " + settings.YELP_API_KEY}
+    
 
     #23 Se houver palavra chave e localização
     if keyword and location: 
         #23 Palavra chave e localização
-        params = {'term': keyword, 'location': location}
+        params = {
+        'term': keyword,
+        'location': location,
+        'limit': limit,      # 🔥 até 15
+        'offset': offset     # 🔥 para pular os primeiros
+        } 
 
     try:
         #23 Fazendo a busca
