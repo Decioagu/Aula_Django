@@ -11,7 +11,7 @@ class Chassi(models.Model):
         verbose_name_plural = 'Chassis'
 
     def __str__(self):
-        return self.numero
+        return self.numero # Retorna o numero do Chassi
 
 #20 Tabela de Montadora
 class Montadora(models.Model):
@@ -23,7 +23,7 @@ class Montadora(models.Model):
         verbose_name_plural = 'Montadoras'
 
     def __str__(self):
-        return self.nome
+        return self.nome # Retorna o nome da Montadora
 
 #20 Função para definir uma montadora padrão caso não exista
 def set_default_montadora():

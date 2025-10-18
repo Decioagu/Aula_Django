@@ -1043,7 +1043,7 @@ Arquivo:
 
 **Aula_30**
 
-- Paginação de lista de produtos com Function-Based Viewsem em Django:
+- Paginação de lista de produtos com Function-Based (Função) Viewsem em Django:
 
 - pip install django django-bootstrap4
 
@@ -1079,7 +1079,7 @@ Arquivo:
 
 **Aula_31**
 
-- Paginação de lista de produtos com Class Based Views em Django:
+- Paginação de lista de produtos com Class-Based (Classe) Views em Django:
 
 - pip install django django-bootstrap4
 

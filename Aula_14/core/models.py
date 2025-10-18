@@ -22,7 +22,7 @@ class Base(models.Model):
     ativo = models.BooleanField('Ativo', default=True) # campo de indicação de registro ativo
 
     class Meta:
-        abstract = True
+        abstract = True # definindo o modelo como abstrato
 
 '''
    Carregar imagem e dados da pagina HTML conteúdo de Serviços 
